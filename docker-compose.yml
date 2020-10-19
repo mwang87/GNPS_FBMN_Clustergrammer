@@ -1,0 +1,22 @@
+version: '3'
+services:
+  gnpsfbmnclustergrammer-dash:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gnpsfbmnclustergrammer-dash
+    volumes:
+      - ./logs:/app/logs:rw
+    ports:
+    - "5860:5000"
+    networks:
+      - default
+      - nginx-net
+    restart: unless-stopped
+    command: /app/run_server.sh
+
+
+networks:
+  nginx-net:
+    external:
+      name: nginx-net
